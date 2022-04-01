@@ -1,0 +1,1 @@
+import chalk from"chalk";import{program}from"commander";program.version(chalk.red("123"));

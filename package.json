@@ -1,0 +1,32 @@
+{
+  "name": "snapshot-cli",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./bin/main.js",
+  "type": "module",
+  "bin": {
+    "snapshot": "./bin/main.js"
+  },
+  "scripts": {
+    "build": "gulp"
+  },
+  "author": "ldk",
+  "license": "ISC",
+  "keywords": [
+    "cli",
+    "snapshot"
+  ],
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "commander": "^9.1.0",
+    "inquirer": "^8.2.2",
+    "ora": "^6.1.0",
+    "rimraf": "^3.0.2"
+  },
+  "devDependencies": {
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify": "^3.0.2"
+  }
+}
