@@ -1,1 +1,6 @@
 gulpfile.js
+package-lock.json
+yarn.lock
+.gitignore
+.npmignore
+/src
