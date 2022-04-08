@@ -1,9 +1,8 @@
 {
   "name": "snapshot-cli",
   "version": "0.0.1",
-  "description": "",
+  "description": "生成包的快照,供开发环境集成测试使用",
   "main": "./bin/main.js",
-  "type": "module",
   "bin": {
     "snapshot": "./bin/main.js"
   },
@@ -17,7 +16,7 @@
     "snapshot"
   ],
   "dependencies": {
-    "chalk": "^5.0.1",
+    "chalk": "4.0.0",
     "commander": "^9.1.0",
     "inquirer": "^8.2.2",
     "ora": "^6.1.0",

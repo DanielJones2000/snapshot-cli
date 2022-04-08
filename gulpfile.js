@@ -1,9 +1,7 @@
-import gulp from 'gulp'
-import concat from 'gulp-concat'
-import uglify from 'gulp-uglify'
-import del from 'del'
-
-const {src, task, dest} = gulp
+const {src, task, dest} = require('gulp')
+const concat = require('gulp-concat')
+const uglify = require('gulp-uglify')
+const del = require('del')
 
 task('default', () => {
     const glupTask = src('src/index.js')
