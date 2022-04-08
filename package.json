@@ -4,7 +4,7 @@
   "description": "生成包的快照,供开发环境集成测试使用",
   "main": "./bin/main.js",
   "bin": {
-    "snapshot": "./bin/main.js"
+    "snapshot-cli": "./bin/main.js"
   },
   "scripts": {
     "build": "gulp"
