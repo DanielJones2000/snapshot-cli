@@ -20,6 +20,17 @@ function execVersion(key) {
     })
 }
 
+
+function publish(root, tag) {
+    const cmd = `npm publish --tag ${tag}`
+    return new Promise(r => {
+        Shell.cd(root)
+        Shell.exec(cmd,{silent:true}, function(code, stdout, stderr) {
+            r(true)
+        })
+    })
+}
+
 /**
  * 根据末尾版本号删除远程仓库的包
  */
@@ -32,21 +43,32 @@ function unPublishPkg(key,version) {
     })
 }
 
-function editPkg(snapshots) {
-    if(Object.keys(snapshots).length === 0) return
-    Object.keys(snapshots).forEach(key => {
-        const item = snapshots[key]
-        if(!item) return false
-        const { editPkg, path } = item
-        fs.writeFileSync(path, JSON.stringify(editPkg))
-        return false
-    })
-
+/**
+ * 恢复package.json
+ * @param {*} snapshots 
+ * @returns 
+ */
+function restorePkg(snapshots) {
     Object.keys(snapshots).forEach(key => {
         const item = snapshots[key]
         if(!item) return false
         const { buffer, path } = item
         fs.writeFileSync(path, buffer.toString())
+        return false
+    })
+}
+
+/**
+ * 修改package.json version为快照版本
+ * @param {*} snapshots 
+ * @returns 
+ */
+function editPkg(snapshots) {
+    Object.keys(snapshots).forEach(key => {
+        const item = snapshots[key]
+        if(!item) return false
+        const { editPkg, path } = item
+        fs.writeFileSync(path, JSON.stringify(editPkg))
         return false
     })
 }
@@ -60,9 +82,9 @@ export default async function () {
         return
     }
     const snapshots = require(`${rootPath}/snapshot.js`)
-    let promiseFn = []
+    const removeFn = []
+    const pubFn = []
     Object.keys(snapshots).forEach(key => {
-        promiseFn.push(unPublishPkg(key, '0.0.1-snapshot'))
         const { src } = snapshots[key]
         const root = `${rootPath}/${src}`
         const path = `${root}/package.json`
@@ -73,10 +95,20 @@ export default async function () {
         snapshots[key].path = path
         snapshots[key].buffer = buffer
         snapshots[key].editPkg = pkg
+        removeFn.push(unPublishPkg(key, '0.0.1-snapshot'))
+        pubFn.push(publish(root, 'snapshot'))
     })
-    if(promiseFn.length > 0) {
+    if(removeFn.length > 0) {
         console.log(Chalk.blue('删除快照版本...'))
-        await Promise.all(promiseFn)
+        await Promise.all(removeFn)
     }
+    console.log(Chalk.blue('修改为快照版本...'))
     editPkg(snapshots)
+    if(pubFn.length > 0) {
+        await Promise.all(pubFn)
+    }
+    setTimeout(() => {
+        console.log(Chalk.blue('恢复默认...'))
+        restorePkg(snapshots)
+    }, 5000)
 }
