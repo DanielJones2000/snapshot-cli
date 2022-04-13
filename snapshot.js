@@ -1,7 +1,6 @@
 module.exports = {
-    '@digibird/arms': {
-        src : '',
-        pkgRegistry: '',
-        buildCmd: ''
+    'snapshot-cli': {
+        src : './',
+        pkgRegistry: ''
     }
 }

@@ -1,6 +1,6 @@
 {
   "name": "snapshot-cli",
-  "version": "0.0.1-snapshot",
+  "version": "0.0.1",
   "description": "生成包的快照,供开发环境集成测试使用",
   "main": "./bin/index.js",
   "bin": {
