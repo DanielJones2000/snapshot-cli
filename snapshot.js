@@ -1,3 +1,7 @@
 module.exports = {
-    'pkg-name': 'src'
+    '@digibird/arms': {
+        src : '',
+        pkgRegistry: '',
+        buildCmd: ''
+    }
 }

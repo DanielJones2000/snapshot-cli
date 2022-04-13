@@ -1,6 +1,6 @@
 {
   "name": "snapshot-cli",
-  "version": "0.0.1",
+  "version": "0.0.1-snapshot",
   "description": "生成包的快照,供开发环境集成测试使用",
   "main": "./bin/index.js",
   "bin": {
@@ -24,10 +24,12 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
+    "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
-    "gulp-uglify": "^3.0.2"
+    "gulp-uglify": "^3.0.2",
+    "shelljs": "^0.8.5"
   }
 }

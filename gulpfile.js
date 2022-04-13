@@ -9,7 +9,11 @@ task('default', () => {
     return del(['bin']).then(()=> {
         glupTask.pipe(babel({
                     presets: ['@babel/preset-env'],
+                    plugins: ['@babel/plugin-transform-runtime']
                  }))
+                 .on('error',err => {
+                    console.log(err)
+                })
                 .pipe(uglify())
                 .pipe(dest('bin'))
         copy.pipe(dest('bin/template'))

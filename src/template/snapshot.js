@@ -1,3 +1,7 @@
 module.exports = {
-    'pkg-name': 'src'
+    'pkg-name': {
+        src : '',
+        pkgRegistry: '',
+        buildCmd: ''
+    }
 }

@@ -1,8 +1,22 @@
 import { resolve } from 'path'
 import fs from 'fs'
 import Chalk from 'chalk'
+import Shell from 'shelljs'
 
-export default () => {
+function execVersion(key) {
+    return new Promise(r => {
+        const cmd = `npm view ${key}@latest version`
+        Shell.exec(cmd,{silent:true}, function(code, stdout, stderr) {
+            r({
+                key,
+                version: stdout.replace('\n','')
+            })
+        })
+    })
+}
+
+
+export default async function () {
     const rootPath = resolve('./')
     const exist = fs.existsSync(`${rootPath}/snapshot.js`)
     if(!exist) {
@@ -10,5 +24,10 @@ export default () => {
         return
     }
     const snapshots = require(`${rootPath}/snapshot.js`)
-    console.log(snapshots)
+    const promiseFn = []
+    Object.keys(snapshots).forEach(key => {
+        promiseFn.push(execVersion(key))
+    })
+    const result = await Promise.all(promiseFn)
+    console.log(result)
 }
