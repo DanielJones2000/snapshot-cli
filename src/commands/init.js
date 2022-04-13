@@ -1,7 +1,5 @@
-const { resolve } = require('path')
+import { resolve } from 'path'
 
-function init() {
+export default function () {
     console.log('111111', resolve('./'))
 }
-
-exports.module = init

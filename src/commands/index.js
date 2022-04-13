@@ -1,21 +1,26 @@
-const options = [
+import Init from './init'
+
+export const options = [
     {
-        cmd: '-i,init',
+        cmd: '-i,-init',
         description: '初始化',
-        fn: 'Init'
+        key: 'Init',
+        fn: Init
     }, {
         cmd: '-v,-version',
         description: '获取版本',
-        fn:'Version'
+        key:'Version'
     }, {
         cmd: '-h,-help',
         description: '获取帮助',
-        fn: 'Help'
+        key: 'Help'
     }
 ]
 
-exports.module = () => {
-    return {
-        options
+export default function (name, opt, command) {
+    const key = Object.keys(name)[0]
+    const node = options.find(row => row.key === key)
+    if(node && node.fn) {
+        node.fn()
     }
 }
