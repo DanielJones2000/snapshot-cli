@@ -1,4 +1,5 @@
 import Init from './init'
+import Snapshot from './snapshot'
 
 export const options = [
     {
@@ -14,6 +15,12 @@ export const options = [
         cmd: '-h,-help',
         description: '获取帮助',
         key: 'Help'
+    },
+    {
+        cmd: '-s,-snapshot',
+        description: '发布镜像版本',
+        key: 'Snapshot',
+        fn: Snapshot
     }
 ]
 
