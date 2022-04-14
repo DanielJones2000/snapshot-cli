@@ -1,5 +1,6 @@
 import Init from './init'
-import Snapshot from './snapshot'
+import Publish from './publish'
+import PkgVersionList from './pkg-version-list'
 
 export const options = [
     {
@@ -17,10 +18,16 @@ export const options = [
         key: 'Help'
     },
     {
-        cmd: '-s,-snapshot',
+        cmd: '-p,-publish',
         description: '发布镜像版本',
-        key: 'Snapshot',
-        fn: Snapshot
+        key: 'Publish',
+        fn: Publish
+    },
+    {
+        cmd: '-l,-list',
+        description: '查询已发布的末尾版本列表',
+        key: 'List',
+        fn: PkgVersionList
     }
 ]
 

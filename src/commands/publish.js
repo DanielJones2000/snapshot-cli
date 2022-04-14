@@ -1,25 +1,7 @@
-import { resolve } from 'path'
 import fs from 'fs'
 import Chalk from 'chalk'
 import Shell from 'shelljs'
-
-/**
- * 查询末尾版本号
- * @param {*} key 
- * @returns 
- */
-function execVersion(key) {
-    return new Promise(r => {
-        const cmd = `npm view ${key}@snapshot version`
-        Shell.exec(cmd,{silent:true}, function(code, stdout, stderr) {
-            r({
-                key,
-                version: stdout.replace('\n','')
-            })
-        })
-    })
-}
-
+import Util from '../util/index'
 
 function publish(root, tag) {
     const cmd = `npm publish --tag ${tag}`
@@ -75,13 +57,8 @@ function editPkg(snapshots) {
 
 
 export default async function () {
-    const rootPath = resolve('./')
-    const exist = fs.existsSync(`${rootPath}/snapshot.js`)
-    if(!exist) {
-        console.log(Chalk.red('配置文件不存在! 可使用命令 `snapshot-cli -i` 进行初始化!'))
-        return
-    }
-    const snapshots = require(`${rootPath}/snapshot.js`)
+    if(!Util.checkOptionFile()) return
+    const snapshots = Util.snapshotJson()
     const removeFn = []
     const pubFn = []
     Object.keys(snapshots).forEach(key => {
