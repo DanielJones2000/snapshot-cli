@@ -1,6 +1,6 @@
 module.exports = {
-    'snapshot-cli': {
-        src : './',
-        pkgRegistry: ''
-    }
+	'snapshot-cli': {
+		src: './',
+		pkgRegistry: '',
+	},
 }

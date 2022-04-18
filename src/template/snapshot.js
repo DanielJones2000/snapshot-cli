@@ -1,6 +1,6 @@
 module.exports = {
-    'pkg-name': {
-        src : '',
-        pkgRegistry: ''
-    }
+	'pkg-name': {
+		src: '',
+		pkgRegistry: '',
+	},
 }
